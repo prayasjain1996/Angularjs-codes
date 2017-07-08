@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MARKSHEET APP</title>
+
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/ngStorage.min.js"></script>
+    <script src="js/task.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/controller.js"></script>
+        <link rel="stylesheet" href="css/custom.css">
+  
+    <style>
+        table,tr,td{
+               border: 1px solid black;
+        }
+        button{
+            background-color: black;
+            color: antiquewhite;
+            cursor:pointer;
+        
+        }
+       
+     td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+       
+    </style>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+ <div>
+     <fieldset border=2px>
+     <legend>Student report</legend>
+     <div>
+      <table>
+         <h2>Enter details ::</h2>
+         <thead>
+              
+                <td>Name</td>
+             
+               
+                   <td>Class</td>
+                   
+                <td>Rollno</td>
+                
+                <td>Sex</td>
+             
+                <td>DOB</td>
+             
+            </thead>
+            <tbody>
+     <td><input type="text" ng-model="name" autofocus></td>
+        
+          
+              <td><input type="text" ng-model="clas" ></td>
+          
+          
+              <td><input type="text" ng-model="rollno"></td>
+          
+             
+              <td>
+                 <input type="text" ng-model="sex">
+              </td>
+       
+            
+                 
+                     
+                <td>
+                      <input type="date" ng-model="date">
+                 </td>
+                 
+             
+          </tbody>
+             
+         </table>
+        <table>
+           <h2>Enter Marks ::</h2>
+           <thead>
+               <td>Physics</td>
+                <td>Chemistry</td>
+                <td>Math</td>
+           </thead>
+             <tbody>
+              <td><input type="text" ng-model="physics" ng-change="compute()"></td>
+              <td><input type="text" ng-model="math" ng-change="compute()"></td>
+              <td><input type="text" ng-model="chemistry" ng-change="compute()"></td>
+            </tbody>
+          </table>
+          
+         <br>
+         <h2>Result::</h2>
+         <table>
+               <tr>
+      
+		<td>Total Marks ::{{sum}}</td>
+		<td>Aggregate   ::{{percent}}</td>
+		<td>Result status ::{{status}}</td>
+        
+         </tr>
+          </table>
+          <br>
+          
+              <button ng-click="addrecord()" ng-disabled="disableButtons" >Add Record</button> 
+         <button ng-click="saverecord()" ng-disabled="disableButtons">Save Record</button>        
+               <button ng-click="deleterecord()" ng-disabled="disableButtons">Delete Record</button>
+               <button ng-click="loadrecord()">Load Record</button>
+                
+         <button ng-click="updaterecord()">Update Record</button>
+          
+          
+      
+         </div>
+      
+      </fieldset>
+      <div>
+       <fieldset>
+      <legend>Report</legend>
+           <table align="right">
+                <tr>
+                <td>
+              Search By Name::<input type="checkbox" ng-model="show">
+              <input type="text" ng-model="search.name" ng-show="show" placeholder="Type value to Search">
+              </td>
+                
+            
+              
+                <td>
+              Search By rollno::<input type="checkbox" ng-model="show">
+              <input type="text" ng-model="search.rollno" ng-show="show" placeholder="Type value to Search">
+              </td>
+              
+               </tr>
+            
+           </table>
+                    <table align="right">
+                     <tr><td><label>Sort By::</label></td>
+                         <td> <select ng-model="sort" name="Sort by">
+                   <option>name</option>
+                                 <option>class</option>        
+                     <option>rollno</option>
+                       <option>sex</option>
+                        <option>date</option> 
+                       <option>physics</option>
+                         <option>chemistry</option>
+                           <option>math</option>
+                             <option>sum</option>
+                               <option>percent</option>
+                               <option>status</option>
+                               
+               </select>
+                         </td>
+                         </tr>
+            
+           </table>
+                    
+                     <h2>Student record ::</h2>
+                    
+     
+
+                
+                
+        
+        <table border="1">
+            <thead>
+              
+                <td>Name</td>
+                <td>Class</td>
+                <td>Rollno</td>
+                <td>Sex</td>
+                <td>DOB</td>
+                <td>Physics</td>
+                <td>Chemistry</td>
+                <td>Math</td>
+                <td>Sum</td>
+                <td>Percent</td>
+                <td>Status</td>
+                <td>Operations</td>
+            </thead>
+           
+            <tbody>
+                             
+               <tr ng-class={"red":student.red(),"green":student.green()} ng-repeat="student in students|filter:search|orderBy:sort track by $index">
+              
+                     <td>
+                         {{student.name}}
+                     </td>
+                       <td>
+                         {{student.clas}}
+                     </td>
+                     <td>
+                         {{student.rollno}}
+                     </td>
+                       <td>
+                         {{student.sex}}
+                     </td>
+                       <td>
+                         {{student.date}}
+                     </td>
+                      <td>
+                          {{student.physics}}
+                       </td>
+                      <td>
+                          {{student.chemistry}}
+                      </td>
+                      <td>
+                          {{student.math}}
+                      </td>
+                      <td>
+                          {{student.sum}}
+                      </td>
+                      <td>
+                          {{student.percent}}
+                      </td>
+                      <td>
+                          {{student.status}}
+                      </td>
+                       <td><img ng-click="student.toggle();" src="delete3.png">
+			 <img  src="edit1.png" ng-click="edit(student)">
+</td>
+                </tr>
+   
+            </tbody>
+          </table></fieldset></div></div></body></html>
