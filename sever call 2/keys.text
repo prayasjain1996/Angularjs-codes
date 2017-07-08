@@ -1,0 +1,4 @@
+http://api.giphy.com/v1/gifs/search?q=iron+men&api_key=eb0798fb6b4b4534b107be86ab01624e
+http://cricapi.com/api/matches/SRK3oULR78NikaCQA0A83JUorxp2
+http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID={98fbca014098ea5255894c838e920982}
+http://api.apixu.com/v1/current.json?key=5b3d516cf6124ff692f42420172706&q=paris

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IMAGE SEARCH</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="searchmodel.js"></script>
+    <script src="searchcontroller.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+   <table>
+       <h1 align="center">IMAGE SEARCH</h1>
+   </table>
+   <br>
+   <br>
+   <table align="center">
+       <tr>
+           <td><input type="text" placeholder="Enter image" ng-model="search" ></td>
+           <td><button ng-click="docall()">Search now</button></td>
+       </tr>
+   </table>
+  
+		<li ng-repeat ="i in result">
+			<img src="{{i.images.original.url}}">
+    </li>
+</body>
+</html>
