@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>IMAGE SEARCH</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="model.js"></script>
+    <script src="controller.js"></script>
+    <style>
+        
+        body{
+            background-image: url(Xdzcnzw.jpg);
+        }
+        table{
+            border: 1;
+            font-weight: bold;
+            justify-content: center;
+      animation-timing-function: cubic-beziercubic-bezier();
+            font-variant-position: super;
+            font: arial;
+        }
+    </style>
+</head>
+<body ng-app="myapp" ng-controller="myctrl">
+   <table>
+       <h1 align="center">WEATHER REPORT</h1>
+   </table>
+   <br>
+   <br>
+   <table align="center">
+       <tr>
+           <td><input type="text" placeholder="Enter City" ng-model="search" ></td>
+           <td><button ng-click="docall()">Search now</button></td>
+       </tr>
+   </table>
+   <br>
+   <br>
+   <br>
+  <div ng-show="showme" align="center">
+   <table>
+   
+   <tr>
+       <td> Last updated       :: </td>
+       <td>{{result.last_updated}}</td>
+       </tr>
+       <tr>
+       <td> Current temp:: </td>
+       <td>{{result.temp_c}} C</td>
+       </tr>
+    
+                      <tr>
+                          <td>Current temp::</td>
+                          <td>{{result.temp_f}}F</td>
+                          </tr>
+                          <tr>
+                          <td>Condition ::</td>
+                          <td>{{ result.condition.text }}</td>
+       </tr>
+       
+                        <tr>
+                         <td>Wind speed :: </td>
+                         <td>{{ result.wind_mph }}mph</td>
+       </tr>
+                          <tr>
+                           <td> Wind speed  ::</td>
+                           <td> {{ result.wind_kph }}kph</td>
+       </tr>
+                          <tr>
+                           <td>Wind direction:: </td>
+                           <td>{{ result.wind_dir }}</td>
+       </tr>
+                           <tr>
+                            <td>Humidity is:: </td>
+                            <td>{{ result.humidity }}</td>
+                            </tr>
+                            <tr>
+                               
+       </tr>
+                       <tr>
+                           <td><img src="{{result.condition.icon}}" height="100"></td>
+                       </tr>
+                        
+    </table>
+    </div>	
+</body>
+</html>
