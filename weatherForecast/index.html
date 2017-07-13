@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forecast</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="module.js"></script>
+    <script src="model.js"></script>
+    <script src="controller.js"></script>
+    <style>
+        
+        body{
+            background-image: url(Xdzcnzw.jpg);
+        }
+        table{
+            border: 1;
+            font-weight: bold;
+            justify-content: center;
+      animation-timing-function: cubic-beziercubic-bezier();
+            font-variant-position: super;
+            font: arial;
+        }
+    </style>
+</head>
+
+<body ng-app="myapp" ng-controller="myctrl">
+     <table>
+       <h1 align="center">WEATHER REPORT</h1>
+   </table>
+   <br>
+   <br>
+   <table align="center">
+       <tr>
+           <td><input type="text" placeholder="Enter City" ng-model="city" ></td>
+           <td><button ng-click="docall()">Search now</button></td>
+       </tr>
+   </table>
+   <br>
+   <br>
+   <br>
+  <div ng-show="showme" align="center">
+   <table ng-repeat ="i in result">
+   
+   <tr>
+       <td> Date       :: </td>
+       <td>{{i.date}}</td>
+       </tr>
+       <tr>
+       <td> Max temp:: </td>
+       <td>{{i.day.maxtemp_c}} C</td>
+       </tr>
+    
+                      <tr>
+                          <td>Max temp::</td>
+                          <td>{{i.day.maxtemp_f}}F</td>
+                          </tr>
+                          <tr>
+                          <td>Min temp ::</td>
+                          <td>{{ i.day.mintemp_c }} C</td>
+       </tr>
+       
+                        <tr>
+                         <td>Min temp :: </td>
+                         <td>{{ i.day.mintemp_f }}F</td>
+       </tr>
+                          <tr>
+                           <td> Avg temp  ::</td>
+                           <td> {{ i.day.avgtemp_c }}C</td>
+       </tr>
+                          <tr>
+                           <td>Avg temp:: </td>
+                           <td>{{ i.day.avgtemp_f }}F</td>
+       </tr>
+                           <tr>
+                            <td>Condition is:: </td>
+                            <td>{{ i.day.condition.text }}</td>
+                            </tr>
+                            <tr>
+                                <td>Sunrise :: </td>
+                            <td>{{ i.astro.sunrise }}</td>
+       </tr>
+                       <tr>
+                                <td>Sunset :: </td>
+                            <td>{{ i.astro.sunset }}</td>
+       </tr>
+                       <tr>
+                           <td><img src="{{i.day.condition.icon}}" height="100"></td>
+                       </tr>
+                        
+    </table>
+    </div>
