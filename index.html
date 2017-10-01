@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <script src="../../libs/angular.min.js"></script>
+    <script src="../../libs/ngStorage.min.js"></script>
+    <script>
+        var app = angular.module("myApp", ['ngStorage']);
+
+        app.factory("myfactory", ($http, $q) => {
+            var object = {
+                callServer() {
+                    var pr = $q.defer();
+                    console.log("Calling Json....");
+                    $http.get("../user.json").then(function(data) {
+                        //                        console.log(data.data);
+                        pr.resolve(data.data);
+                    }, function(er) {
+                        console.log("Error", +er);
+                        pr.reject(er);
+                    });
+                    return pr.promise;
+                }
+            }
+            return object;
+        });
+
+        var flag = 0;
+        app.controller("myctrl", (myfactory, $scope, $location, $localStorage) => {
+            $scope.login = (uid, pwd) => {
+                console.log("login called....");
+                var userJson = myfactory.callServer();
+                console.log("I got the promise....");
+                console.log("user is...", userJson);
+
+                userJson.then(function(data) {
+                    array = data;
+                    console.log("pass...");
+                    array.forEach((x) => {
+                        if (x.name == uid && x.password == pwd) {
+                            location.href = "ques.html";
+                            $scope.store = $localStorage;
+                            $scope.store.name = x.name;
+                            flag = 1;
+                        }
+                    })
+                    if (flag != 1) {
+                        alert("wrong uid or pwd");
+                    }
+                }, function(err) {
+                    array = err;
+                    console.log("fail...");
+                });
+
+            }
+
+        });
+
+    </script>
+</head>
+
+<body ng-app="myApp" ng-controller="myctrl">
+    <h1>Login</h1>
+    <table>
+        <tr>
+            <td><label for="">Name : </label></td>
+            <td><input type="text" ng-model="uid" placeholder="Type Name"></td>
+        </tr>
+        <tr>
+            <td><label for="">Password : </label></td>
+            <td><input type="password" ng-model="pwd" placeholder="Type Password"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button ng-click="login(uid,pwd)">Submit</button>
+            </td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>
